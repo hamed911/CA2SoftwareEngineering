@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ir.gorjiara.banktransactions;
+package net.gorjiara.banktransactions;
 
 import org.json.simple.parser.JSONParser;
 
