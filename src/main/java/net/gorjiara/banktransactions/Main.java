@@ -5,7 +5,9 @@
  */
 package net.gorjiara.banktransactions;
 
-import org.json.simple.parser.JSONParser;
+import net.gorjiara.banktransactions.domain.server.Server;
+import com.google.gson.GsonBuilder;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -14,8 +16,10 @@ import org.json.simple.parser.JSONParser;
 public class Main {
     public static void main(String[] args){
         System.out.println("Hi");
-        JSONParser parser = new JSONParser();
         
+        Logger.getLogger(Main.class).info("before running the server");
+        Server server = new Server(9000);
+        new Thread(server).start();
     }
     
 }
