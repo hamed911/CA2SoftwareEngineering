@@ -19,12 +19,12 @@ import java.net.Socket;
  *
  * @author Hamed Ara
  */
-public class WorkerRunnable implements Runnable{
+public class RequestHandler implements Runnable{
 
     protected Socket clientSocket = null;
     protected String serverText   = null;
 
-    public WorkerRunnable(Socket clientSocket, String serverText) {
+    public RequestHandler(Socket clientSocket, String serverText) {
         this.clientSocket = clientSocket;
         this.serverText   = serverText;
     }

@@ -13,14 +13,14 @@ import java.net.Socket;
  *
  * @author Hamed Ara
  */
-public class Server implements Runnable{
+public class SocketHandler implements Runnable{
 
     protected int          serverPort   = 8080;
     protected ServerSocket serverSocket = null;
     protected boolean      isStopped    = false;
     protected Thread       runningThread= null;
 
-    public Server(int port){
+    public SocketHandler(int port){
         this.serverPort = port;
     }
 
@@ -42,7 +42,7 @@ public class Server implements Runnable{
                     "Error accepting client connection", e);
             }
             new Thread(
-                new WorkerRunnable(
+                new RequestHandler(
                     clientSocket, "Multithreaded Server")
             ).start();
         }

@@ -5,8 +5,14 @@
  */
 package net.gorjiara.banktransactions;
 
-import net.gorjiara.banktransactions.domain.server.Server;
+import net.gorjiara.banktransactions.domain.server.SocketHandler;
 import com.google.gson.GsonBuilder;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
+import java.awt.event.KeyEvent;
+import java.io.FileNotFoundException;
+import net.gorjiara.banktransactions.dataaccess.server.JsonFileManagement;
+import net.gorjiara.banktransactions.domain.server.CoreBankingManagement;
 import org.apache.log4j.Logger;
 
 /**
@@ -15,11 +21,15 @@ import org.apache.log4j.Logger;
  */
 public class Main {
     public static void main(String[] args){
-        System.out.println("Hi");
+        Logger.getLogger(Main.class).info("Server start working ...");
+        try{
+            CoreBankingManagement bankingManagement= JsonFileManagement.getInstance().readDataFromJsonCore();
+            SocketHandler server = new SocketHandler(bankingManagement.getPort());
+            new Thread(server).start();
+        }catch(FileNotFoundException ex){
+            Logger.getLogger(Main.class).error("core.json file does not exist.", ex);
+        }
         
-        Logger.getLogger(Main.class).info("before running the server");
-        Server server = new Server(9000);
-        new Thread(server).start();
     }
     
 }
