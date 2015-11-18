@@ -49,15 +49,19 @@ public class RequestHandler implements Runnable{
                 if(Stated.equals("END"))
                     return;
                 IdentifiedTransaction transaction = JsonFileManagement.toObject(Stated, IdentifiedTransaction.class);
-                System.out.println("client said:"+Stated);
+                Logger.getLogger(RequestHandler.class).info("client said:"+Stated);
+                long time = System.currentTimeMillis();
                 try{
                     Response response= bankingTransaction.commitTransaction(transaction);
-                    output.println(JsonFileManagement.toGson(response));
+                    String responseS= JsonFileManagement.toGson(response);
+                    output.println(responseS);
+                    Logger.getLogger(RequestHandler.class).info("Response after '"+(System.currentTimeMillis()-time)+"' ms is: "+responseS);
                 }catch(IllegalTransactionException ex){
                     Response response = new Response(transaction.id, transaction.type, transaction.deposit.toString(), false, ex.getMessage());
-                    output.println(JsonFileManagement.toGson(response));
+                    String responseS = JsonFileManagement.toGson(response);
+                    output.println(responseS);
+                    Logger.getLogger(RequestHandler.class).info("Response after '"+(System.currentTimeMillis()-time)+"' ms is: "+responseS);
                 }
-                long time = System.currentTimeMillis();
                 System.out.println("Request processed: " + time);
             }
         } catch (IOException e) {

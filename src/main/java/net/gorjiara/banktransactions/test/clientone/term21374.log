@@ -1,2 +1,10 @@
-Nov 18, 2015 11:59:19 PM net.gorjiara.banktransactions.test.clienttwo.Client configureLocalLogger
+Nov 19, 2015 12:33:51 AM net.gorjiara.banktransactions.test.clientone.Client configureLocalLogger
 INFO: Terminal 'ATM21374' now is available
+Nov 19, 2015 12:33:51 AM net.gorjiara.banktransactions.test.clientone.Client main
+INFO: Start Transaction:{"id":"1","type":"deposit","amount":3000,"deposit":33227781}
+Nov 19, 2015 12:33:51 AM net.gorjiara.banktransactions.test.clientone.Client main
+INFO: End Transaction with response: {"transactionID":"1","type":"deposit","deposit":"33227781","isSuccess":true,"message":"Remained:\u00274,000\u0027"}
+Nov 19, 2015 12:33:51 AM net.gorjiara.banktransactions.test.clientone.Client main
+INFO: Start Transaction:{"id":"2","type":"withdraw","amount":10000,"deposit":35527439}
+Nov 19, 2015 12:33:51 AM net.gorjiara.banktransactions.test.clientone.Client main
+INFO: End Transaction with response: {"transactionID":"2","type":"withdraw","deposit":"35527439","isSuccess":false,"message":"InadequateAmount"}

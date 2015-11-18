@@ -62,9 +62,11 @@ public class Client {
             try {
                 List<Response>responses = new ArrayList<>();
                 for(Transaction t:terminal.transactions){
+                    logger.info("Start Transaction:"+ JsonFileManagement.toGson(os));
                     os.println(JsonFileManagement.toGson(new IdentifiedTransaction(t, terminal.type+"-"+terminal.id)));
                     String responseLine = in.readLine();
                     System.out.println("Server: " + responseLine);
+                    logger.info("End Transaction with response: "+ responseLine);
                     responses.add(JsonFileManagement.toObject(responseLine,Response.class));
                 }
                 os.println("END");

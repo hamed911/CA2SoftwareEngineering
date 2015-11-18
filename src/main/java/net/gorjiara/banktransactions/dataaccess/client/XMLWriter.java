@@ -16,10 +16,9 @@ import javax.xml.stream.XMLStreamWriter;
 import net.gorjiara.banktransactions.domain.transactioncontrol.Response;
 
 /**
- *
+ * http://www.tutorialspoint.com/java_xml/java_stax_create_document.htm
  * @author Hamed Ara
  */
-//http://www.tutorialspoint.com/java_xml/java_jdom_create_document.htm
 public class XMLWriter {
     public void writeToXML(String filename,List<Response> responses)throws XMLStreamException, IOException{
     StringWriter stringWriter = new StringWriter();
