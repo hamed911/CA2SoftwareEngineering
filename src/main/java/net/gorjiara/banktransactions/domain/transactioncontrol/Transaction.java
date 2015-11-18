@@ -12,10 +12,10 @@ import java.math.BigInteger;
  * @author Hamed Ara
  */
 public class Transaction {
-    protected String id;
-    protected String type;
-    protected BigInteger amount;
-    protected BigInteger deposit;   
+    public String id;
+    public String type;
+    public BigInteger amount;
+    public BigInteger deposit;   
 
     public Transaction(String id, String type, BigInteger amount, BigInteger deposit) {
         this.id = id;

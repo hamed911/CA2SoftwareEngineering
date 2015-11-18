@@ -14,5 +14,14 @@ public class Response {
     public String type;
     public String deposit;
     public Boolean isSuccess;
-    public String massage;
+    public String message;
+
+    public Response(String transactionID, String type, String deposit, Boolean isSuccess, String massage) {
+        this.transactionID = transactionID;
+        this.type = type;
+        this.deposit = deposit;
+        this.isSuccess = isSuccess;
+        this.message = massage;
+    }
+    
 }

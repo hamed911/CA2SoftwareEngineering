@@ -5,11 +5,13 @@
  */
 package net.gorjiara.banktransactions.domain.server;
 
+import java.io.IOException;
+
 /**
  *
  * @author Hamed Ara
  */
 public interface ISync {
-    public void sync();
+    public void sync()throws IOException;
     
 }

@@ -8,8 +8,13 @@ package net.gorjiara.banktransactions.dataaccess.server;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import net.gorjiara.banktransactions.domain.server.CoreBankingManagement;
 
 /**
@@ -29,6 +34,13 @@ public class JsonFileManagement {
     public CoreBankingManagement readDataFromJsonCore()throws FileNotFoundException{
         Gson gson = new Gson();
         return gson.fromJson(new BufferedReader(new FileReader(fileName)), CoreBankingManagement.class);
+    }
+    public static void syncJsonCore(CoreBankingManagement bankManagement)throws IOException{
+        Gson gson = new GsonBuilder().create();
+        Writer writer = new FileWriter("src\\main\\java\\net\\gorjiara\\banktransactions\\dataaccess\\server\\core1.json");
+        String json =gson.toJson(bankManagement);
+        writer.write(json);
+        writer.close();
     }
     public static String toGson(Object obj){
         Gson gson = new Gson();

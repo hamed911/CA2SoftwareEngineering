@@ -13,14 +13,19 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.stream.XMLStreamException;
 import net.gorjiara.banktransactions.dataaccess.client.XMLParser;
+import net.gorjiara.banktransactions.dataaccess.client.XMLWriter;
 import net.gorjiara.banktransactions.dataaccess.server.JsonFileManagement;
 import net.gorjiara.banktransactions.domain.client.Terminal;
 import net.gorjiara.banktransactions.domain.transactioncontrol.IdentifiedTransaction;
+import net.gorjiara.banktransactions.domain.transactioncontrol.Response;
 import net.gorjiara.banktransactions.domain.transactioncontrol.Transaction;
 import org.xml.sax.SAXException;
 
@@ -35,9 +40,11 @@ public class Client {
         PrintWriter os = null;
         BufferedReader in = null;
         Terminal terminal=null;
+        XMLParser parser  = null;
+        String curDir = System.getProperty("user.dir")+"\\src\\main\\java\\net\\gorjiara\\banktransactions\\test\\clientone\\";
         try {
-            String curDir = System.getProperty("user.dir")+"\\src\\main\\java\\net\\gorjiara\\banktransactions\\test\\clientone\\";
-            terminal = (new XMLParser(curDir+"terminal.xml")).configureTerminal();
+            parser = new XMLParser();
+            terminal = parser.configureTerminal(curDir+"terminal.xml");
             configureLocalLogger(curDir+terminal.logFilePath,terminal.type+terminal.id);
             smtpSocket = new Socket(terminal.serverIP, terminal.serverPort);
             os = new PrintWriter(smtpSocket.getOutputStream(),true);
@@ -53,19 +60,24 @@ public class Client {
         }
         if (smtpSocket != null && os != null && in != null) {
             try {
+                List<Response>responses = new ArrayList<>();
                 for(Transaction t:terminal.transactions){
                     os.println(JsonFileManagement.toGson(new IdentifiedTransaction(t, terminal.type+"-"+terminal.id)));
                     String responseLine = in.readLine();
                     System.out.println("Server: " + responseLine);
-                    break;
+                    responses.add(JsonFileManagement.toObject(responseLine,Response.class));
                 }
+                os.println("END");
                 os.close();
                 in.close();
-                smtpSocket.close();   
+                smtpSocket.close();
+                (new XMLWriter()).writeToXML(curDir+"response.xml",responses);
             } catch (UnknownHostException e) {
                 System.err.println("Trying to connect to unknown host: " + e);
             } catch (IOException e) {
                 System.err.println("IOException:  " + e);
+            }catch(XMLStreamException ex){
+                System.err.println("Error in XMLStreamException");
             }
         }
     }

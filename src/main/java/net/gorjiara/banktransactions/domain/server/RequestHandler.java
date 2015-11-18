@@ -17,8 +17,10 @@ import java.net.Socket;
 import net.gorjiara.banktransactions.dataaccess.server.JsonFileManagement;
 import net.gorjiara.banktransactions.domain.transactioncontrol.ITransaction;
 import net.gorjiara.banktransactions.domain.transactioncontrol.IdentifiedTransaction;
+import net.gorjiara.banktransactions.domain.transactioncontrol.Response;
 import net.gorjiara.banktransactions.domain.transactioncontrol.Transaction;
 import net.gorjiara.banktransactions.exception.IllegalTransactionException;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -36,27 +38,30 @@ public class RequestHandler implements Runnable{
     }
 
     public void run() {
+        BufferedReader input=null;
+        PrintWriter output =null;
         try {
-            BufferedReader input = new BufferedReader(new InputStreamReader( clientSocket.getInputStream()));
+            input = new BufferedReader(new InputStreamReader( clientSocket.getInputStream()));
+            output = new PrintWriter(clientSocket.getOutputStream(),true);
             System.out.println("client accepted...");
-            String Stated = input.readLine();
-            Transaction transaction = JsonFileManagement.toObject(Stated, IdentifiedTransaction.class);
-            System.out.println("client said:"+Stated);
-            PrintWriter output = new PrintWriter(clientSocket.getOutputStream(),true);
-            try{
-                bankingTransaction.commitTransaction(transaction);
-                
-            }catch(IllegalTransactionException ex){
-                
+            while(true){
+                String Stated = input.readLine();
+                if(Stated.equals("END"))
+                    return;
+                IdentifiedTransaction transaction = JsonFileManagement.toObject(Stated, IdentifiedTransaction.class);
+                System.out.println("client said:"+Stated);
+                try{
+                    Response response= bankingTransaction.commitTransaction(transaction);
+                    output.println(JsonFileManagement.toGson(response));
+                }catch(IllegalTransactionException ex){
+                    Response response = new Response(transaction.id, transaction.type, transaction.deposit.toString(), false, ex.getMessage());
+                    output.println(JsonFileManagement.toGson(response));
+                }
+                long time = System.currentTimeMillis();
+                System.out.println("Request processed: " + time);
             }
-            long time = System.currentTimeMillis();
-            output.println("yabooo!");
-            input.close();
-            output.close();
-            System.out.println("Request processed: " + time);
         } catch (IOException e) {
-            //report exception somewhere.
-            e.printStackTrace();
+            Logger.getLogger(RequestHandler.class).error("IOException",e);
         }
     }
 }

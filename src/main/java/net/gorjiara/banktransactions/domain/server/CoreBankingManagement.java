@@ -5,7 +5,10 @@
  */
 package net.gorjiara.banktransactions.domain.server;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import net.gorjiara.banktransactions.dataaccess.server.JsonFileManagement;
 import net.gorjiara.banktransactions.domain.transactioncontrol.ITransaction;
 import net.gorjiara.banktransactions.domain.transactioncontrol.Response;
 import net.gorjiara.banktransactions.domain.transactioncontrol.Transaction;
@@ -19,17 +22,24 @@ public class CoreBankingManagement implements ITransaction,ISync{
     private int port;
     private List<Deposit> deposits;
     private String outLog;
+    public CoreBankingManagement(){
+        deposits = new ArrayList<>();
+    }
     public int getPort(){
         return port;
     }
 
     @Override
-    public void sync() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void sync() throws IOException {
+        JsonFileManagement.syncJsonCore(this);
     }
 
     @Override
     public Response commitTransaction(Transaction transaction) throws IllegalTransactionException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for(Deposit deposit:deposits)
+            if(deposit.getId().equals(transaction.deposit.toString())){
+                return deposit.commitTransaction(transaction);
+            }
+        throw new IllegalTransactionException("NoSuchDeposit");
     }
 }

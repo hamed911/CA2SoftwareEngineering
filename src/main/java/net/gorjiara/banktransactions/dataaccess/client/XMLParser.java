@@ -23,7 +23,9 @@ import net.gorjiara.banktransactions.domain.client.Terminal;
 public class XMLParser {
     private Document document;
     private static XMLParser parser;
-    public XMLParser(String path)throws ParserConfigurationException,SAXException,IllegalAccessException{
+    public XMLParser(){
+    }
+    public Terminal configureTerminal(String path)throws ParserConfigurationException,SAXException,IllegalAccessException{
         DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         //"./src/interestdepositcalculation/ioutils/DepositsInformation.xml"
         try{
@@ -31,9 +33,6 @@ public class XMLParser {
         }catch(IOException ex){
             throw new IllegalAccessException("File '"+path+"' does not exist");
         }
-        
-    }
-    public Terminal configureTerminal(){
         Terminal terminal = new Terminal();
         terminal.id = document.getDocumentElement().getAttribute("id");
         terminal.type = document.getDocumentElement().getAttribute("type");

@@ -1,0 +1,1 @@
+<?xml version="1.0" ?><terminal><transactions><transaction TransactionID="1" Type="deposit" Diposit="33227781" isSuccess="true" Message="Remained:'7,000'"></transaction><transaction TransactionID="2" Type="withdraw" Diposit="35527439" isSuccess="false" Message="InadequateAmount"></transaction></transactions></terminal>
