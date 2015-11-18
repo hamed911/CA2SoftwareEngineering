@@ -5,12 +5,14 @@
  */
 package net.gorjiara.banktransactions.domain.transactioncontrol;
 
-import net.gorjiara.banktransactions.exception.IllegalTransactionException;
-
 /**
  *
  * @author Hamed Ara
  */
-public interface ITransaction {
-    public Response commitTransaction(Transaction transaction) throws IllegalTransactionException;
+public class Response {
+    public String transactionID;
+    public String type;
+    public String deposit;
+    public Boolean isSuccess;
+    public String massage;
 }

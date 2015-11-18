@@ -13,7 +13,10 @@ import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 import net.gorjiara.banktransactions.dataaccess.server.JsonFileManagement;
 import net.gorjiara.banktransactions.domain.server.CoreBankingManagement;
+import net.gorjiara.banktransactions.domain.server.UIHandler;
+import org.apache.log4j.FileAppender;
 import org.apache.log4j.Logger;
+import org.apache.log4j.SimpleLayout;
 
 /**
  *
@@ -22,14 +25,18 @@ import org.apache.log4j.Logger;
 public class Main {
     public static void main(String[] args){
         Logger.getLogger(Main.class).info("Server start working ...");
+//        SimpleLayout layout = new SimpleLayout();    
+//        FileAppender appender = new FileAppender(layout,"your filename",false);    
+//        logger.addAppender(appender);
         try{
             CoreBankingManagement bankingManagement= JsonFileManagement.getInstance().readDataFromJsonCore();
-            SocketHandler server = new SocketHandler(bankingManagement.getPort());
+            SocketHandler server = new SocketHandler(bankingManagement);
+            UIHandler uiHandler = new UIHandler(bankingManagement);
+            new Thread(uiHandler).start();
             new Thread(server).start();
         }catch(FileNotFoundException ex){
             Logger.getLogger(Main.class).error("core.json file does not exist.", ex);
         }
         
     }
-    
 }

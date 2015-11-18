@@ -19,9 +19,10 @@ public class SocketHandler implements Runnable{
     protected ServerSocket serverSocket = null;
     protected boolean      isStopped    = false;
     protected Thread       runningThread= null;
-
-    public SocketHandler(int port){
-        this.serverPort = port;
+    protected CoreBankingManagement bankingManagement;
+    public SocketHandler(CoreBankingManagement bankingManagement){
+        this.serverPort = bankingManagement.getPort();
+        this.bankingManagement = bankingManagement;
     }
 
     public void run(){
@@ -42,7 +43,7 @@ public class SocketHandler implements Runnable{
                     "Error accepting client connection", e);
             }
             new Thread(
-                new RequestHandler(
+                new RequestHandler(bankingManagement,
                     clientSocket, "Multithreaded Server")
             ).start();
         }

@@ -7,13 +7,15 @@ package net.gorjiara.banktransactions.domain.server;
 
 import java.util.List;
 import net.gorjiara.banktransactions.domain.transactioncontrol.ITransaction;
+import net.gorjiara.banktransactions.domain.transactioncontrol.Response;
+import net.gorjiara.banktransactions.domain.transactioncontrol.Transaction;
 import net.gorjiara.banktransactions.exception.IllegalTransactionException;
 
 /**
  *
  * @author Hamed Ara
  */
-public class CoreBankingManagement implements ITransaction{
+public class CoreBankingManagement implements ITransaction,ISync{
     private int port;
     private List<Deposit> deposits;
     private String outLog;
@@ -22,7 +24,12 @@ public class CoreBankingManagement implements ITransaction{
     }
 
     @Override
-    public void commitTransaction() throws IllegalTransactionException {
+    public void sync() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Response commitTransaction(Transaction transaction) throws IllegalTransactionException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

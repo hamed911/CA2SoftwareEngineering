@@ -30,4 +30,12 @@ public class JsonFileManagement {
         Gson gson = new Gson();
         return gson.fromJson(new BufferedReader(new FileReader(fileName)), CoreBankingManagement.class);
     }
+    public static String toGson(Object obj){
+        Gson gson = new Gson();
+        return gson.toJson(obj);
+    }
+    public static <T extends Object> T toObject(String objString,Class<T> c){
+        Gson gson = new Gson();
+        return gson.fromJson(objString, c);
+    }
 }

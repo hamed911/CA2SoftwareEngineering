@@ -5,13 +5,25 @@
  */
 package net.gorjiara.banktransactions.domain.transactioncontrol;
 
+import java.math.BigInteger;
+
 /**
  *
  * @author Hamed Ara
  */
 public class Transaction {
-    private String id;
-    private String type;
-    private String amount;
-    private String deposit;   
+    protected String id;
+    protected String type;
+    protected BigInteger amount;
+    protected BigInteger deposit;   
+
+    public Transaction(String id, String type, BigInteger amount, BigInteger deposit) {
+        this.id = id;
+        this.type = type;
+        this.amount = amount;
+        this.deposit = deposit;
+    }
+
+    
+    
 }

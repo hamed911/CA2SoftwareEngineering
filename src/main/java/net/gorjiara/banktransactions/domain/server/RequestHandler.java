@@ -14,6 +14,11 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
+import net.gorjiara.banktransactions.dataaccess.server.JsonFileManagement;
+import net.gorjiara.banktransactions.domain.transactioncontrol.ITransaction;
+import net.gorjiara.banktransactions.domain.transactioncontrol.IdentifiedTransaction;
+import net.gorjiara.banktransactions.domain.transactioncontrol.Transaction;
+import net.gorjiara.banktransactions.exception.IllegalTransactionException;
 
 /**
  *
@@ -23,10 +28,11 @@ public class RequestHandler implements Runnable{
 
     protected Socket clientSocket = null;
     protected String serverText   = null;
-
-    public RequestHandler(Socket clientSocket, String serverText) {
+    protected ITransaction bankingTransaction;
+    public RequestHandler(ITransaction bankingManagement,Socket clientSocket, String serverText) {
         this.clientSocket = clientSocket;
         this.serverText   = serverText;
+        this.bankingTransaction = bankingManagement;
     }
 
     public void run() {
@@ -34,8 +40,15 @@ public class RequestHandler implements Runnable{
             BufferedReader input = new BufferedReader(new InputStreamReader( clientSocket.getInputStream()));
             System.out.println("client accepted...");
             String Stated = input.readLine();
+            Transaction transaction = JsonFileManagement.toObject(Stated, IdentifiedTransaction.class);
             System.out.println("client said:"+Stated);
             PrintWriter output = new PrintWriter(clientSocket.getOutputStream(),true);
+            try{
+                bankingTransaction.commitTransaction(transaction);
+                
+            }catch(IllegalTransactionException ex){
+                
+            }
             long time = System.currentTimeMillis();
             output.println("yabooo!");
             input.close();
