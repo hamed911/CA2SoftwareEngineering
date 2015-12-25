@@ -359,8 +359,6 @@ INFO: End Transaction with response: {"transactionID":"3","type":"deposit","depo
 Nov 26, 2015 2:06:46 PM net.gorjiara.banktransactions.test.clienttwo.Client run
 INFO: Start Transaction:{"id":"3","type":"deposit","amount":10,"deposit":33227781}
 Nov 26, 2015 2:06:46 PM net.gorjiara.banktransactions.test.clienttwo.Client run
-INFO: End Transaction with response: {"transactionID":"3","type":"deposit","deposit":"33227781","isSuccess":true,"message":"Remained:\u002714,850\u0027"}
-Nov 26, 2015 2:06:46 PM net.gorjiara.banktransactions.test.clienttwo.Client run
 INFO: End Transaction with response: {"transactionID":"3","type":"deposit","deposit":"33227781","isSuccess":true,"message":"Remained:\u002714,860\u0027"}
 Nov 26, 2015 2:06:46 PM net.gorjiara.banktransactions.test.clienttwo.Client run
 INFO: Start Transaction:{"id":"3","type":"deposit","amount":10,"deposit":33227781}
@@ -371,7 +369,7 @@ INFO: Start Transaction:{"id":"3","type":"deposit","amount":10,"deposit":3322778
 Nov 26, 2015 2:06:46 PM net.gorjiara.banktransactions.test.clienttwo.Client run
 INFO: End Transaction with response: {"transactionID":"3","type":"deposit","deposit":"33227781","isSuccess":true,"message":"Remained:\u002714,880\u0027"}
 Nov 26, 2015 2:06:46 PM net.gorjiara.banktransactions.test.clienttwo.Client run
-INFO: Start Transaction:{"id":"3","type":"deposit","amount":10,"deposit":33227781}
+INFO: End Transaction with response: {"transactionID":"3","type":"deposit","deposit":"33227781","isSuccess":true,"message":"Remained:\u002714,850\u0027"}
 Nov 26, 2015 2:06:46 PM net.gorjiara.banktransactions.test.clienttwo.Client run
 INFO: Start Transaction:{"id":"3","type":"deposit","amount":10,"deposit":33227781}
 Nov 26, 2015 2:06:46 PM net.gorjiara.banktransactions.test.clienttwo.Client run
@@ -388,6 +386,8 @@ Nov 26, 2015 2:06:46 PM net.gorjiara.banktransactions.test.clienttwo.Client run
 INFO: Start Transaction:{"id":"3","type":"deposit","amount":10,"deposit":33227781}
 Nov 26, 2015 2:06:46 PM net.gorjiara.banktransactions.test.clienttwo.Client run
 INFO: End Transaction with response: {"transactionID":"3","type":"deposit","deposit":"33227781","isSuccess":true,"message":"Remained:\u002714,920\u0027"}
+Nov 26, 2015 2:06:46 PM net.gorjiara.banktransactions.test.clienttwo.Client run
+INFO: Start Transaction:{"id":"3","type":"deposit","amount":10,"deposit":33227781}
 Nov 26, 2015 2:06:46 PM net.gorjiara.banktransactions.test.clienttwo.Client run
 INFO: Start Transaction:{"id":"3","type":"deposit","amount":10,"deposit":33227781}
 Nov 26, 2015 2:06:46 PM net.gorjiara.banktransactions.test.clienttwo.Client run
@@ -667,11 +667,11 @@ INFO: End Transaction with response: {"transactionID":"3","type":"deposit","depo
 Nov 26, 2015 2:06:47 PM net.gorjiara.banktransactions.test.clienttwo.Client run
 INFO: Start Transaction:{"id":"3","type":"deposit","amount":10,"deposit":33227781}
 Nov 26, 2015 2:06:47 PM net.gorjiara.banktransactions.test.clienttwo.Client run
-INFO: End Transaction with response: {"transactionID":"3","type":"deposit","deposit":"33227781","isSuccess":true,"message":"Remained:\u002715,620\u0027"}
-Nov 26, 2015 2:06:47 PM net.gorjiara.banktransactions.test.clienttwo.Client run
 INFO: End Transaction with response: {"transactionID":"3","type":"deposit","deposit":"33227781","isSuccess":true,"message":"Remained:\u002715,630\u0027"}
 Nov 26, 2015 2:06:47 PM net.gorjiara.banktransactions.test.clienttwo.Client run
 INFO: Start Transaction:{"id":"3","type":"deposit","amount":10,"deposit":33227781}
+Nov 26, 2015 2:06:47 PM net.gorjiara.banktransactions.test.clienttwo.Client run
+INFO: End Transaction with response: {"transactionID":"3","type":"deposit","deposit":"33227781","isSuccess":true,"message":"Remained:\u002715,620\u0027"}
 Nov 26, 2015 2:06:47 PM net.gorjiara.banktransactions.test.clienttwo.Client run
 INFO: Start Transaction:{"id":"3","type":"deposit","amount":10,"deposit":33227781}
 Nov 26, 2015 2:06:47 PM net.gorjiara.banktransactions.test.clienttwo.Client run

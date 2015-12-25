@@ -1,1 +1,1 @@
-{"port":9000,"deposits":[{"customer":"Ali Alavi","id":"33227781","initialBalance":"1,000","upperBound":"1,000,000","lock1":{}},{"customer":"Reza Rezaei","id":"35527439","initialBalance":"0","upperBound":"0","lock1":{}}],"outLog":"server.out"}
+{"port":9000,"deposits":[{"customer":"Ali Alavi","id":"33227781","initialBalance":"16,000","upperBound":"1,000,000","lock1":{}},{"customer":"Reza Rezaei","id":"35527439","initialBalance":"0","upperBound":"0","lock1":{}}],"outLog":"server.out"}

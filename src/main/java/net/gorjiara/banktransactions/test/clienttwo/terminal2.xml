@@ -6,9 +6,9 @@ and open the template in the editor.
 -->
 
 
-<terminal id="21374" type="ATM">
+<terminal id="213" type="ATM">
     <server ip="127.0.0.1" port="9000"/>
-    <outLog path="term21374.log" />
+    <outLog path="term213.log" />
     <transactions>
         <transaction id="1" type="deposit" amount="3,000" deposit="33227781" />
         <transaction id="2" type="withdraw" amount="10,000" deposit ="35527439" />

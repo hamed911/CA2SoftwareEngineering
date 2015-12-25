@@ -25,6 +25,13 @@ public class CoreBankingManagement implements ITransaction,ISync{
     public CoreBankingManagement(){
         deposits = new ArrayList<>();
     }
+
+    public CoreBankingManagement(int port, List<Deposit> deposits, String outLog) {
+        this.port = port;
+        this.deposits = deposits;
+        this.outLog = outLog;
+    }
+    
     public int getPort(){
         return port;
     }

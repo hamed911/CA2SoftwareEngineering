@@ -21,6 +21,14 @@ public class Deposit implements ITransaction{
     private String id;
     private String initialBalance;
     private String upperBound;
+
+    public Deposit(String customer, String id, String initialBalance, String upperBound) {
+        this.customer = customer;
+        this.id = id;
+        this.initialBalance = initialBalance;
+        this.upperBound = upperBound;
+    }
+    
     private Object lock1 = new Object();
     @Override
     public Response commitTransaction(Transaction transaction) throws IllegalTransactionException {

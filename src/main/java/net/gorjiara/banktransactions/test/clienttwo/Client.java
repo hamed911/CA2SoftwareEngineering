@@ -33,9 +33,14 @@ import org.xml.sax.SAXException;
  *
  * @author Hamed Ara
  */
-public class Client {
+public class Client implements Runnable{
     public static Logger logger;
-    public static void main(String[] args) {
+    private int threadID;
+    public Client(int i){
+        threadID=i;
+    }
+    @Override
+    public void run() {
         Socket smtpSocket = null;  
         PrintWriter os = null;
         BufferedReader in = null;
@@ -44,7 +49,7 @@ public class Client {
         String curDir = System.getProperty("user.dir")+"\\src\\main\\java\\net\\gorjiara\\banktransactions\\test\\clienttwo\\";
         try {
             parser = new XMLParser();
-            terminal = parser.configureTerminal(curDir+"terminal.xml");
+            terminal = parser.configureTerminal(curDir+"terminal"+threadID+".xml");
             configureLocalLogger(curDir+terminal.logFilePath,terminal.type+terminal.id);
             smtpSocket = new Socket(terminal.serverIP, terminal.serverPort);
             os = new PrintWriter(smtpSocket.getOutputStream(),true);
@@ -62,7 +67,7 @@ public class Client {
             try {
                 List<Response>responses = new ArrayList<>();
                 for(Transaction t:terminal.transactions){
-                    logger.info("Start Transaction:"+ JsonFileManagement.toGson(os));
+                    logger.info("Start Transaction:"+ JsonFileManagement.toGson(t));
                     os.println(JsonFileManagement.toGson(new IdentifiedTransaction(t, terminal.type+"-"+terminal.id)));
                     String responseLine = in.readLine();
                     System.out.println("Server: " + responseLine);
@@ -73,7 +78,7 @@ public class Client {
                 os.close();
                 in.close();
                 smtpSocket.close();
-                (new XMLWriter()).writeToXML(curDir+"response.xml",responses);
+                (new XMLWriter()).writeToXML(curDir+"response"+threadID+".xml",responses);
             } catch (UnknownHostException e) {
                 System.err.println("Trying to connect to unknown host: " + e);
             } catch (IOException e) {
@@ -96,6 +101,6 @@ public class Client {
             System.err.println("error in Security");  
         } catch (IOException e) {  
             System.err.println("IOException in opening local logger");
-        }  
+        }
     }
 }
